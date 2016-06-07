@@ -1,0 +1,36 @@
+CREATE TABLE students (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE teachers (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE courses (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  teacher_id INTEGER NOT NULL,
+  FOREIGN KEY (teacher_id) REFERENCES teachers (id)
+  MATCH SIMPLE ON DELETE CASCADE
+);
+
+CREATE TABLE students_courses (
+  student_id INTEGER NOT NULL,
+  course_id INTEGER NOT NULL,
+  FOREIGN KEY (student_id) REFERENCES students (id)
+  MATCH SIMPLE ON DELETE CASCADE,
+  FOREIGN KEY (course_id) REFERENCES courses (id)
+  MATCH SIMPLE ON DELETE CASCADE
+);
+
+CREATE TABLE airplanes (
+  id SERIAL PRIMARY KEY,
+  speed SMALLINT NOT NULL CHECK (speed >= 0)
+);
+
+CREATE TABLE trains (
+  id SERIAL PRIMARY KEY,
+  speed SMALLINT NOT NULL CHECK (speed >= 0)
+);
